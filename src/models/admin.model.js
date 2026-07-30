@@ -33,17 +33,16 @@ const adminSchema = new mongoose.Schema(
 );
 
 adminSchema.pre("save", async function(next) {
-    if(!this.isModified("password")) return next();
+    if(!this.isModified("password")) return;
 
     this.password = await bcrypt.hash(this.password, 10);
-    next();
 });
 
 adminSchema.methods.isPasswordCorrect = async function (password) {
     return await bcrypt.compare(password, this.password);
 }
 
-adminSchema.method.generateAccessToken = function () {
+adminSchema.methods.generateAccessToken = function () {
     return jwt.sign(
         {
             _id: this._id,
