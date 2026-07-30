@@ -39,7 +39,7 @@ adminSchema.pre("save", async function(next) {
     next();
 });
 
-adminSchema.methods.isPosswordCorrect = async function (password) {
+adminSchema.methods.isPasswordCorrect = async function (password) {
     return await bcrypt.compare(password, this.password);
 }
 

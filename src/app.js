@@ -36,6 +36,7 @@ app.get("/", (req, res) => {
     })
 });
 
+import adminRoutes from "./routes/admin.routes.js";
 import notFound from "./middleware/notFound.middleware.js";
 import errorHandler from "./middleware/error.middleware.js";
 app.use(notFound);
