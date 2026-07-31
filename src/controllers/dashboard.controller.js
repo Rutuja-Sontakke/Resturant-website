@@ -41,7 +41,7 @@ const getDashboard = asyncHandler(async(req, res) => {
                     total: totalReservations,
                     pending: pendingReservations,
                     confirmed: confirmedReservations,
-                    completed: completedReservations,
+                    completed: completeReservations,
                     cancelled: cancelledReservations,
                 },
             },
