@@ -61,13 +61,12 @@ const updateMenu = asyncHandler(async (req, res) => {
     }
 
     const updatedMenu = await Menu.findByIdAndUpdate(
-        id,
-        req.body,
+        id, 
+        req.body, 
         {
-            new: true,
+            returnDocument: "after",
             runValidators: true,
-        }
-    );
+        });
 
     return res.status(200).json(
         new ApiResponse(
