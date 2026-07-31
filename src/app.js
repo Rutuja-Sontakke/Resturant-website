@@ -8,6 +8,7 @@ import dotenv from "dotenv";
 
 import adminRouter from "./routes/admin.routes.js";
 import menuRoutes from "./routes/menu.routes.js"
+import reservationRoutes from "./routes/reservation.routes.js";
 import notFound from "./middleware/notFound.middleware.js";
 import errorHandler from "./middleware/error.middleware.js";
 
@@ -44,7 +45,7 @@ app.get("/", (req, res) => {
 
 app.use("/api/admin", adminRouter);
 app.use("/api/menu", menuRoutes);
-
+app.use("/api/reservations", reservationRoutes);
 app.use(notFound);
 app.use(errorHandler);
 
