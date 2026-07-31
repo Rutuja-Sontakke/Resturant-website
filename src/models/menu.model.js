@@ -38,12 +38,12 @@ const menuSchema = new mongoose.Schema(
         image: {
             url: {
                 type: String,
-                default: "",
+                default: ""
             },
             public_id: {
                 type: String,
-                default: "",
-            },
+                default: ""
+            }
         },
 
         veg: {
