@@ -6,15 +6,20 @@ import {
 } from "../controllers/reservation.controller.js"
 
 import verifyJWT  from "../middleware/auth.middleware.js";
-
+import { reservation }  from "../validators/reservation.validator.js";
+import validate from "../validators/validate.js";
 
 const router = Router();
 
-router.post("/", createReservation);
+router.post("/", reservation , validate, createReservation);
 
-router.get("/", getReservation);
+router.get("/", verifyJWT, getReservation);
 
-router.route("/:id").put(verifyJWT, updateReservation);
+router.patch(
+    "/:id",
+    verifyJWT,
+    updateReservation
+);
 
 
 export default router;

@@ -3,6 +3,8 @@ import asyncHandler from "../middleware/asyncHandler.js"
 import ApiError from "../utils/ApiError.js"
 import ApiResponse from "../utils/ApiResponse.js"
 
+
+
 const loginAdmin = asyncHandler(async(req, res) => {
     const {email, password} = req.body;
 
@@ -43,4 +45,45 @@ const loginAdmin = asyncHandler(async(req, res) => {
     );
 });
 
-export {loginAdmin};
+const getProfile = asyncHandler(async (req, res) => {
+    return res.status(200).json(
+        new ApiResponse(
+            200,
+            req.admin,
+            "Profile fetched successfully"
+        )
+    );
+});
+
+
+const changePassword = asyncHandler(async (req, res) => {
+
+    const { oldPassword, newPassword } = req.body;
+
+    const admin = await Admin.findById(req.admin._id);
+
+    const isCorrect =
+        await admin.isPasswordCorrect(oldPassword);
+
+    if (!isCorrect) {
+        throw new ApiError(
+            400,
+            "Old password is incorrect"
+        );
+    }
+
+    admin.password = newPassword;
+
+    await admin.save();
+
+    return res.status(200).json(
+        new ApiResponse(
+            200,
+            {},
+            "Password changed successfully"
+        )
+    );
+});
+
+
+export { loginAdmin, getProfile, changePassword };
