@@ -3,8 +3,8 @@ import Admin from "../models/admin.model.js"
 import asyncHandler from "./asyncHandler.js"
 import ApiError from "../utils/ApiError.js"
 
-const verifyJWT = asyncHandler(async(req, res)=> {
-    const token = req.header.authorization?.replace("Bearer", "");
+const verifyJWT = asyncHandler(async(req, res, next) => {
+    const token = req.header("Authorization")?.replace("Bearer ", "").trim();
 
     if(!token) {
         throw new ApiError(401, "Unauthorized");
