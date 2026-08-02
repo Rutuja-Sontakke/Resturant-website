@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ArrowRight, Clock, Mail, MapPin, Phone } from "lucide-react";
 import Btn from "@/components/site/Btn";
+import { createReservation } from "@/services/reservationService";
 
 const inputStyle = {
   width: "100%",
@@ -18,12 +19,39 @@ const inputStyle = {
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", phone: "", date: "", guests: "2", message: "" });
   const [sent, setSent] = useState(false);
+  const [loading, setLoading] = useState(false);
+  
   const update = (key, value) => setForm((current) => ({ ...current, [key]: value }));
-  const submit = (event) => { event.preventDefault(); setSent(true); };
+
+  const submit = async (event) => {
+    event.preventDefault();
+    try {
+      setLoading(true);
+
+      const parsedGuests = parseInt(form.guests.split(" ")[0], 10) || 2;
+
+      await createReservation({
+        name: form.name.trim(),
+        email: form.email.trim(),
+        phone: form.phone.replace(/\D/g, ""), 
+        reservationDate: new Date(form.date).toISOString(), 
+        guests: parsedGuests,
+        message: form.message.trim(),
+      });
+
+      setSent(true);
+      setForm({ name: "", email: "", phone: "", date: "", guests: "2", message: "" });
+    } catch (error) {
+      console.error(error);
+      alert(error.response?.data?.message || "Something went wrong.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: "#F4EFE6", paddingTop: "24px" }}>
-      <div className="max-w-[1440px] mx-auto px-6 lg:px-16" style={{ textAlign: "left" }}>
+      <div className="max-w-[1440px] mx-auto px-6 lg:px-16" style={{ textDecoration: "none" }}>
         
         <div style={{ marginBottom: "48px", textAlign: "left" }}>
           <span 
@@ -55,13 +83,13 @@ export default function Contact() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16" style={{ paddingBottom: "64px" }}>
           <div>
             <div className="rounded-3xl overflow-hidden h-64 mb-8 relative" style={{ backgroundColor: "#E8E0D4", border: "1px solid #E8E0D4" }}>
-              <img src="https://images.unsplash.com/photo-1569336415962-a4bd9f69cd83?w=800&h=400&fit=crop&auto=format" alt="Map of Anjuna Goa" className="w-full h-full object-cover opacity-60" />
+              <img src="https://unsplash.com" alt="Map of Anjuna Goa" className="w-full h-full object-cover opacity-60" />
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="rounded-2xl px-6 py-4 shadow-lg text-center" style={{ backgroundColor: "#FBF7F0", border: "1px solid #E8E0D4" }}>
                   <MapPin size={24} className="mx-auto mb-2" style={{ color: "#C05C38" }} />
                   <p className="font-serif text-lg font-semibold" style={{ color: "#2C1A0E", margin: 0 }}>Baba Au Rhum</p>
                   <p style={{ color: "#6b6375", fontSize: "14px", margin: "4px 0" }}>Hilltop Road, Anjuna, Goa</p>
-                  <a href="https://maps.google.com" target="_blank" rel="noreferrer" style={{ color: "#C05C38", fontSize: "12px", textDecoration: "underline" }}>Open in Maps →</a>
+                  <a href="https://google.com" target="_blank" rel="noreferrer" style={{ color: "#C05C38", fontSize: "12px", textDecoration: "underline" }}>Open in Maps →</a>
                 </div>
               </div>
             </div>
@@ -106,8 +134,8 @@ export default function Contact() {
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <label className="text-xs uppercase tracking-wider" style={{ color: "#6b6375" }}>
-                    Phone
-                    <input style={inputStyle} placeholder="+91 98765 43210" value={form.phone} onChange={(e) => update("phone", e.target.value)} />
+                    Phone *
+                    <input required type="tel" maxLength={10} minLength={10} style={inputStyle} placeholder="9876543210" value={form.phone} onChange={(e) => update("phone", e.target.value)} />
                   </label>
                   <label className="text-xs uppercase tracking-wider" style={{ color: "#6b6375" }}>
                     Number of Guests
@@ -126,8 +154,8 @@ export default function Contact() {
                   Special Requests
                   <textarea rows="3" style={{ ...inputStyle, resize: "none" }} placeholder="Dietary requirements, occasion, anything else..." value={form.message} onChange={(e) => update("message", e.target.value)} />
                 </label>
-                <Btn type="submit" size="lg" className="w-full justify-center mt-2">
-                  Request Reservation <ArrowRight size={18} />
+                <Btn type="submit" size="lg" className="w-full justify-center mt-2" disabled={loading}>
+                  {loading ? "Booking..." : "Request Reservation"} <ArrowRight size={18} />
                 </Btn>
               </form>
             )}
