@@ -22,8 +22,8 @@ export default function Home() {
             alt="Baba Au Rhum open-air dining under trees"
             className="w-full h-full object-cover"
           />
-<div className="absolute inset-0 bg-gradient-to-r from-[#2C1A0E]/20 via-[#2C1A0E]/30 to-[#2C1A0E]/10" />          <div
-            className="absolute inset-0 opacity-20"
+          <div className="absolute inset-0 bg-gradient-to-r from-[#2C1A0E]/50 via-[#2C1A0E]/30 to-[#2C1A0E]/10" />          <div
+            className="absolute inset-0 opacity-30"
             style={{
               backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
               backgroundSize: "200px 200px",
@@ -37,7 +37,8 @@ export default function Home() {
               <div className="h-px w-8 bg-primary/70" />
               <span className="text-primary text-xs tracking-[0.2em] uppercase font-sans font-medium">Anjuna · Goa</span>
             </div>
-            <h1 className="font-serif text-[clamp(3rem,7vw,7rem)] font-semibold text-card leading-[1.05] mb-6 tracking-tight">
+            <h1 className="font-serif text-[clamp(5.5rem,8.5vw,8.5rem)] font-bold text-card leading-[1.05] mb-6 tracking-tight">
+
               Where the{" "}
               <em className="text-primary" style={{ fontStyle: "italic" }}>jungle</em>{" "}
               meets the kitchen.
@@ -78,17 +79,39 @@ export default function Home() {
       </section>
 
       <section className="max-w-[1440px] mx-auto px-6 lg:px-16 py-24 lg:py-32">
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-14">
-          <div>
-            <SectionLabel>What we do</SectionLabel>
-            <h2 className="font-serif text-[clamp(2rem,4vw,3.5rem)] font-semibold text-foreground leading-tight max-w-lg">
-              From the oven, the garden, and the open fire.
-            </h2>
-          </div>
-          <Link to="/menu" className="mt-6 lg:mt-0 self-start lg:self-auto">
-            <Btn variant="ghost">Full menu <ArrowRight size={16} /></Btn>
-          </Link>
-        </div>
+  <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-16">
+    <div className="max-w-[600px]">
+      <span 
+            className="uppercase font-sans font-semibold tracking-[4px]" 
+            style={{ 
+              fontSize: "12px", 
+              color: "#C05C38",
+              display: "block",
+              marginBottom: "4px"
+            }}
+          >
+           --- What we do 
+      </span>
+      <h3
+        className="font-serif font-semibold text-[#2C1A0E]! leading-[1.05] tracking-[-0.03em] mt-5"
+        style={{
+          fontSize: "clamp(2.4rem,4vw,3.2rem)",
+          margin: 0,
+        }}
+      >
+        From the oven, the garden, and the open fire.
+      </h3>
+    </div>
+
+    <Link to="/menu" className="mt-10 lg:mt-0">
+      <Btn
+        variant="ghost"
+        className="text-[18px] font-medium text-[#2C1A0E] hover:bg-transparent"
+      >
+        Full menu <ArrowRight size={18} />
+      </Btn>
+    </Link>
+  </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {[
@@ -114,18 +137,31 @@ export default function Home() {
       <section className="bg-foreground overflow-hidden">
         <div className="max-w-[1440px] mx-auto px-6 lg:px-16 py-20 lg:py-28 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div>
-            <SectionLabel><span className="text-accent/70">Our Story</span></SectionLabel>
-            <h2 className="font-serif text-[clamp(2rem,3.5vw,3rem)] font-semibold text-card leading-tight mb-6">
+            <span 
+            className="uppercase font-sans font-semibold tracking-[4px]" 
+            style={{ 
+              fontSize: "12px", 
+              color: "#C05C38",
+              display: "block",
+              marginBottom: "4px"
+            }}
+          >
+           ---Our Story
+          </span>
+            <h3 className="font-serif text-[clamp(2rem,3.5vw,3rem)] font-semibold text-card leading-tight mb-6">
               Built by hand, run with heart, fed by Anjuna.
-            </h2>
+            </h3>
             <p className="text-card/60 font-sans leading-relaxed mb-4">
               Baba Au Rhum began as a dream on a hillock in Anjuna — a simple French bakery where the morning smells right and the coffee is never rushed. Over the years the menu grew, the garden took over, and the name stuck.
             </p>
-            <p className="text-card/60 font-sans leading-relaxed mb-8">
+            <p className="text-card/50 font-sans leading-relaxed pt-4 mb-8">
               We grow our own herbs, source our eggs from local farms, and import a handful of key ingredients from France and Italy — the ones that simply cannot be compromised. Everything else is Goa.
             </p>
             <Link to="/about">
-              <Btn variant="outline" className="border-card/30 text-card hover:bg-card hover:text-foreground">
+              <Btn
+                variant="outline"
+                className="border-card/30 text-card hover:bg-card hover:text-foreground mt-6"
+              >
                 Read the full story <ArrowRight size={16} />
               </Btn>
             </Link>
@@ -144,12 +180,22 @@ export default function Home() {
       </section>
 
       <section className="max-w-[1440px] mx-auto px-6 lg:px-16 py-24 lg:py-32">
-        <SectionLabel>What guests say</SectionLabel>
+         <span 
+            className="uppercase font-sans font-semibold tracking-[4px]" 
+            style={{ 
+              fontSize: "12px", 
+              color: "#C05C38",
+              display: "block",
+              marginBottom: "4px"
+            }}
+          >
+           ---What guests say
+          </span>
         <div className="flex flex-col lg:flex-row lg:items-start gap-12">
           <div className="lg:w-1/3">
-            <h2 className="font-serif text-[clamp(2rem,3.5vw,3rem)] font-semibold text-foreground leading-tight">
+            <h3 className="font-serif text-[clamp(2rem,3.5vw,3rem)] font-semibold text-foreground leading-tight">
               Stories from the table.
-            </h2>
+            </h3>
             <div className="flex gap-2 mt-8">
               {TESTIMONIALS.map((_, i) => (
                 <button
