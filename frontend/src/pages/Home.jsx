@@ -14,7 +14,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="bg-background">
+    <div className="bg-transparent">
       <section className="relative min-h-screen  flex items-end overflow-hidden">
         <div className="absolute inset-0">
           <img

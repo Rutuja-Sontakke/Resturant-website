@@ -247,17 +247,22 @@ code {
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;}
+    @apply border-border outline-ring/50;
+  }
+
   body {
-    @apply bg-background text-foreground;}
+    @apply text-foreground;
+  }
+
   html {
-    @apply font-sans;}}
+    @apply font-sans;
+  }
+}
 
 
 
    body{
     margin:0;
-    background:#F4EFE6;
     color:#2C1A0E;
     font-family:"Inter",sans-serif;
     }

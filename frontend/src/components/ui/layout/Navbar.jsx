@@ -28,31 +28,24 @@ export default function Navbar() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "bg-white shadow-md py-1" : "bg-transparent py-3"
+        scrolled
+        ? "bg-[#F7F2EA]/95 backdrop-blur-md shadow-[0_1px_20px_rgba(44,26,14,0.08)]"
+        : "bg-transparent"
       }`}
     >
-      <nav
-        className="
-          max-w-[1440px]
-          mx-auto
-          h-[76px]
-          px-16
-          flex
-          items-center
-          justify-between
-        "
-      >
+      <nav className="max-w-[1440px] mx-auto h-[72px] px-6 lg:px-16 flex items-center justify-between">
         {/* Logo Section - Uses div to completely strip global h1 styles */}
         <Link to="/" className="flex flex-col shrink-0 w-max z-50 group no-underline" style={{ textDecoration: 'none' }}>
           <div
             className="font-serif font-semibold"
             style={{
-              fontSize: "27px",
+              fontSize: "24px",
+              fontHeight: "600",
               letterSpacing: "-0.8px",
               color: "#2C1A0E",
               margin: "0px",
               padding: "0px",
-              lineHeight: "1.1"
+              lineHeight: "1"
             }}
           >
             Baba Au Rhum
@@ -73,7 +66,7 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop Navigation */}
-        <ul className="hidden lg:flex items-center gap-10 m-0 p-0 list-none">
+        <ul className="hidden lg:flex items-center gap-6 m-0 p-0 list-none">
           {navLinks.map((item) => (
             <li key={item.to}>
               <NavLink
@@ -81,8 +74,8 @@ export default function Navbar() {
                 end={item.to === "/"}
                 className={({ isActive }) =>
                   isActive
-                    ? "bg-[#C05C38] text-white rounded-full px-4 py-2 text-[14px] font-medium transition-all"
-                    : "text-[#2C1A0E] text-[14px] hover:text-[#C05C38] transition-all"
+                    ? "bg-[#C05C38] text-white rounded-full px-4 py-2 text-[14px] font-medium shadow-[0_2px_12px_rgba(192,92,56,.3)] transition-all"
+                    : "text-[#2C1A0E]/70 hover:text-[#2C1A0E] hover:bg-[#EFE7DC] rounded-full px-4 py-2 text-[14px] font-medium transition-all duration-150"
                 }
               >
                 {item.label}
@@ -94,7 +87,7 @@ export default function Navbar() {
         {/* Reserve Button */}
         <div className="hidden lg:block">
           <Link to="/contact">
-            <Btn className="rounded-full px-6 py-3 text-[14px]">
+            <Btn size="sm" className="rounded-full px-5 py-2 text-[14px]">
               Reserve a Table
             </Btn>
           </Link>
