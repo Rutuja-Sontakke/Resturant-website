@@ -22,9 +22,8 @@ export default function Home() {
             alt="Baba Au Rhum open-air dining under trees"
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#2C1A0E]/80 via-[#2C1A0E]/30 to-transparent" />
-          <div
-            className="absolute inset-0 opacity-0"
+<div className="absolute inset-0 bg-gradient-to-r from-[#2C1A0E]/20 via-[#2C1A0E]/30 to-[#2C1A0E]/10" />          <div
+            className="absolute inset-0 opacity-20"
             style={{
               backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
               backgroundSize: "200px 200px",
@@ -40,18 +39,18 @@ export default function Home() {
             </div>
             <h1 className="font-serif text-[clamp(3rem,7vw,7rem)] font-semibold text-card leading-[1.05] mb-6 tracking-tight">
               Where the{" "}
-              <em className="text-accent" style={{ fontStyle: "italic" }}>jungle</em>{" "}
+              <em className="text-primary" style={{ fontStyle: "italic" }}>jungle</em>{" "}
               meets the kitchen.
             </h1>
-            <p className="text-card/70 text-lg font-sans leading-relaxed max-w-xl mb-10">
+            <p className="text-card/70 text-[18px] font-sans leading-[1.65] max-w-[620px] mb-8">
               French-Italian food, hand-baked pastries, wood-fired pizzas, and live music under Anjuna's green canopy. Open every morning at eight.
             </p>
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-wrap items-center gap-4 mt-6">
               <Link to="/menu">
-                <Btn size="lg">Explore the Menu <ArrowRight size={18} /></Btn>
+                <Btn className="h-14 px-9 text-[17px]">Explore the Menu <ArrowRight size={18} /></Btn>
               </Link>
               <Link to="/about">
-                <Btn size="lg" variant="outline" className="border-card/40 text-card hover:bg-card hover:text-foreground">Our Story</Btn>
+                <Btn size="lg" variant="outline" className="h-14 px-9 text-[17px] border-card/40 text-card hover:bg-card hover:text-foreground">Our Story</Btn>
               </Link>
             </div>
           </div>
@@ -60,9 +59,9 @@ export default function Home() {
         <div className="absolute bottom-0 right-0 hidden lg:flex">
           <div className="bg-card/90 backdrop-blur-sm border-l border-t border-border rounded-tl-2xl px-8 py-5 flex items-center gap-8">
             <div className="text-center">
-              <p className="font-serif text-2xl font-semibold text-foreground">4.9</p>
+              <p className="font-serif text-2xl font-semibold text-foreground">4.4</p>
               <StarRow rating={5} size={12} />
-              <p className="text-xs text-muted-foreground font-sans mt-1">250+ reviews</p>
+              <p className="text-xs text-muted-foreground font-sans mt-1">14,000+ reviews</p>
             </div>
             <div className="w-px h-12 bg-border" />
             <div>
