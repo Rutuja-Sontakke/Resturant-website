@@ -13,9 +13,11 @@ const startServer = async () => {
     await connectDB();
     console.log("Database connection function finished execution.");
 
-    app.listen(PORT, () => {
-      console.log(`Server running on http://localhost:${PORT}`);
-    });
+    if (process.env.VERCEL !== "1") {
+      app.listen(PORT, () => {
+        console.log(`Server running on ${PORT}`);
+      });
+    }
   } catch (error) {
     console.error("Fatal error during server startup:", error);
   }
