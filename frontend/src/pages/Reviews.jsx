@@ -52,9 +52,9 @@ export default function Reviews() {
               <span className="text-[#4285F4] font-bold font-sans text-sm">G</span>
               <span className="text-sm font-sans" style={{ color: "#6b6375" }}>Google Reviews</span>
             </div>
-            <p className="font-serif text-7xl font-semibold leading-none" style={{ color: "#2C1A0E", margin: 0 }}>4.9</p>
+            <p className="font-serif text-7xl font-semibold leading-none" style={{ color: "#2C1A0E", margin: 0 }}>4.4</p>
             <StarRow rating={5} size={20} />
-            <p className="text-sm font-sans mt-2" style={{ color: "#6b6375", margin: 0 }}>Based on 253 reviews</p>
+            <p className="text-sm font-sans mt-2" style={{ color: "#6b6375", margin: 0 }}>Based on 14,000+ reviews</p>
           </div>
           
           <div className="w-px h-24 hidden sm:block" style={{ backgroundColor: "#E8E0D4" }} />
