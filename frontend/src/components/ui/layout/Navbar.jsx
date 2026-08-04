@@ -53,7 +53,7 @@ export default function Navbar() {
           <span
             className="font-serif font-semibold transition-colors duration-200 group-hover:text-[#C05C38]"
             style={{
-              fontSize: "24px",
+              fontSize: "22px",
               fontWeight: 600,
               letterSpacing: "-0.5px",
               lineHeight: "1",
@@ -66,10 +66,10 @@ export default function Navbar() {
           <span
             className="uppercase mt-1"
             style={{
-              fontSize: "10px",
+              fontSize: "9px",
               letterSpacing: "3px",
               lineHeight: "1",
-              color: "rgb(163, 95, 0)",
+              color: "hsl(35, 38%, 52%)",
             }}
           >
             ANJUNA • GOA
