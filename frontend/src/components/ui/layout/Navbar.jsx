@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import Btn from "@/components/site/Btn";
 
@@ -16,49 +16,60 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
+  const location = useLocation();
+  const isHome = location.pathname === "/";
+
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 40);
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    setOpen(false);
+  }, [location.pathname]);
 
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-        ? "bg-[#F7F2EA]/95 backdrop-blur-md shadow-[0_1px_20px_rgba(44,26,14,0.08)]"
-        : "bg-transparent"
+        isHome
+          ? scrolled
+            ? "bg-[#F7F2EA]/95 backdrop-blur-md shadow-[0_1px_20px_rgba(44,26,14,0.08)]"
+            : "bg-transparent"
+          : "bg-[#F7F2EA] shadow-[0_1px_20px_rgba(44,26,14,0.08)]"
       }`}
     >
       <nav className="max-w-[1440px] mx-auto h-[72px] px-6 lg:px-16 flex items-center justify-between">
-        {/* Logo Section - Uses div to completely strip global h1 styles */}
-        <Link to="/" className="flex flex-col shrink-0 w-max z-50 group no-underline" style={{ textDecoration: 'none' }}>
-          <div
-            className="font-serif font-semibold"
+        {/* Logo */}
+        <Link
+          to="/"
+          className="flex flex-col leading-none shrink-0 group no-underline"
+          style={{ textDecoration: "none" }}
+        >
+          <span
+            className="font-serif font-semibold transition-colors duration-200 group-hover:text-[#C05C38]"
             style={{
               fontSize: "24px",
-              fontHeight: "600",
-              letterSpacing: "-0.8px",
-              color: "#2C1A0E",
-              margin: "0px",
-              padding: "0px",
-              lineHeight: "1"
+              fontWeight: 600,
+              letterSpacing: "-0.5px",
+              lineHeight: "1",
+              hover: "#df430b",
             }}
           >
             Baba Au Rhum
-          </div>
+          </span>
+
           <span
-            className="uppercase mt-0.5 block"
+            className="uppercase mt-1"
             style={{
               fontSize: "10px",
-              letterSpacing: "4px",
-              color: "#2C1A0E",
-              margin: "0px",
-              padding: "0px",
-              lineHeight: "1"
+              letterSpacing: "3px",
+              lineHeight: "1",
+              color: "rgb(163, 95, 0)",
             }}
           >
             ANJUNA • GOA
@@ -66,7 +77,7 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop Navigation */}
-        <ul className="hidden lg:flex items-center gap-6 m-0 p-0 list-none">
+        <ul className="hidden lg:flex items-center gap-2 m-0 p-0 list-none">
           {navLinks.map((item) => (
             <li key={item.to}>
               <NavLink
@@ -74,8 +85,8 @@ export default function Navbar() {
                 end={item.to === "/"}
                 className={({ isActive }) =>
                   isActive
-                    ? "bg-[#C05C38] text-white rounded-full px-4 py-2 text-[14px] font-medium shadow-[0_2px_12px_rgba(192,92,56,.3)] transition-all"
-                    : "text-[#2C1A0E]/70 hover:text-[#2C1A0E] hover:bg-[#EFE7DC] rounded-full px-4 py-2 text-[14px] font-medium transition-all duration-150"
+                    ? "bg-[#C05C38] text-white rounded-full px-5 py-2 text-[14px] font-medium shadow-[0_2px_12px_rgba(192,92,56,.30)] transition-all duration-150"
+                    : "text-[#2C1A0E]/80 hover:text-[#2C1A0E] hover:bg-[#E8E0D4] rounded-full px-5 py-2 text-[14px] font-medium transition-all duration-150"
                 }
               >
                 {item.label}
@@ -87,16 +98,19 @@ export default function Navbar() {
         {/* Reserve Button */}
         <div className="hidden lg:block">
           <Link to="/contact">
-            <Btn size="sm" className="rounded-full px-5 py-2 text-[14px]">
+            <Btn
+              size="sm"
+              className="h-10 px-6 rounded-full text-[14px] font-medium"
+            >
               Reserve a Table
             </Btn>
           </Link>
         </div>
 
-        {/* Mobile Button */}
+        {/* Mobile Menu Button */}
         <button
           onClick={() => setOpen(!open)}
-          className="lg:hidden text-[#2C1A0E] z-50 bg-transparent border-0 cursor-pointer"
+          className="lg:hidden p-2 rounded-lg text-[#2C1A0E]"
         >
           {open ? <X size={24} /> : <Menu size={24} />}
         </button>
@@ -104,27 +118,30 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {open && (
-        <div className="lg:hidden bg-[#F4EFE6] border-t px-4 py-6 flex flex-col gap-2 absolute top-full left-0 right-0 shadow-lg">
+        <div className="lg:hidden bg-[#F7F2EA] border-t border-[#E8E0D4] px-6 py-6 flex flex-col gap-2 shadow-lg">
           {navLinks.map((item) => (
             <NavLink
               key={item.to}
               to={item.to}
               end={item.to === "/"}
+              onClick={() => setOpen(false)}
               className={({ isActive }) =>
                 isActive
-                  ? "bg-[#C05C38] text-white rounded-xl px-4 py-3"
-                  : "text-[#2C1A0E] px-4 py-3 rounded-xl hover:bg-[#E8E0D4]"
+                  ? "bg-[#C05C38] text-white rounded-xl px-4 py-3 text-base font-medium"
+                  : "text-[#2C1A0E] hover:bg-[#E8E0D4] rounded-xl px-4 py-3 text-base font-medium transition-all"
               }
-              onClick={() => setOpen(false)}
             >
               {item.label}
             </NavLink>
           ))}
-          <Link to="/contact" onClick={() => setOpen(false)}>
-            <Btn className="w-full justify-center rounded-full">
-              Reserve a Table
-            </Btn>
-          </Link>
+
+          <div className="pt-3 mt-2 border-t border-[#E8E0D4]">
+            <Link to="/contact" onClick={() => setOpen(false)}>
+              <Btn className="w-full justify-center rounded-full">
+                Reserve a Table
+              </Btn>
+            </Link>
+          </div>
         </div>
       )}
     </header>
