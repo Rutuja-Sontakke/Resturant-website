@@ -143,7 +143,7 @@ export default function Footer() {
         <div className="pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-white/40">
 
           <p>
-            © {new Date().getFullYear()} Baba Au Rhum.
+            © {new Date().getFullYear()} Rutuja Sontakke.
             All rights reserved.
           </p>
 
